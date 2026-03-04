@@ -10,6 +10,11 @@ connectDB();
 const app = express();
 const PORT = 5001;
 
+// body parsing middlewares
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+// api routes
 app.use("/auth", authRoutes);
 app.use("/movies", movieRoutes);
 

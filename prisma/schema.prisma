@@ -12,7 +12,7 @@ model User {
   email          String          @unique
   password       String
   createdAt      DateTime        @default(now())
-  createdMovies  Movie[]         @relation("MovieCreator")
+  movies  Movie[]         @relation("MovieCreator")
   watchlistItems WatchlistItem[]
 }
 
