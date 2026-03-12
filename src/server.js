@@ -1,27 +1,13 @@
-import express from "express";
-import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 import { connectDB, disconnectDB } from "./config/db.js";
+import { app } from "./app.js";
 
 dotenv.config();
 connectDB();
 
-const app = express();
 const PORT = 5001;
 
-// body parsing middlewares
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
-
-// health check
-app.get("/health", (req, res) => {
-  res.status(200).json({ status: "ok" });
-});
-
-// api routes
-app.use("/auth", authRoutes);
-
-app.listen(PORT, () => {
+const server = app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);
 });
 
