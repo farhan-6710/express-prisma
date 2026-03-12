@@ -1,5 +1,4 @@
 import express from "express";
-import movieRoutes from "./routes/movieRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import dotenv from "dotenv";
 import { connectDB, disconnectDB } from "./config/db.js";
@@ -14,9 +13,13 @@ const PORT = 5001;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+// health check
+app.get("/health", (req, res) => {
+  res.status(200).json({ status: "ok" });
+});
+
 // api routes
 app.use("/auth", authRoutes);
-app.use("/movies", movieRoutes);
 
 app.listen(PORT, () => {
   console.log(`server is running on ${PORT}`);
